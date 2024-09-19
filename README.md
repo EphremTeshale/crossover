@@ -96,7 +96,7 @@ apt install git pv gawk jq curl
 
 ## Install the Script somewhere, eg to /opt
 
-git clone https://github.com/lephisto/crossover/ /opt 
+git clone https://github.com/Ephrem/crossover/ /opt 
 
 ```
 
@@ -374,3 +374,9 @@ Ceph Documentation:
 Proxmox Wiki:
 https://pve.proxmox.com/wiki/
 
+## Changes on this for:
+* Support for pool names that have characters
+  Line 90: Replace ```declare -r recephimg='([a-zA-Z0-9]+)\:(.*)' ``` by ```declare -r recephimg='([a-zA-Z0-9._-]+)\:(.*)'```
+  Line 835: Replace ```cat "$oldconfig" | sed -r -e "s/^(efidisk|virtio|ide|scsi|sata|mp)([0-9]+):\s([a-zA-Z0-9]+):(.*)-([0-9]+)-disk-([0-9]+).*,(.*)$/\1\2: $newpool:\4-$newvmid-disk-\6-\3,\7/g" | $sedcmd | sed -e '/^$/,$d' | sed -e '/ide[0-9]:.*-cloudinit,media=cdrom.*/d' | grep -v "^parent:\s.*$" | ssh "$dst" "cat - >$newconfig"``` by ```cat "$oldconfig" | sed -r -e "s/^(efidisk|virtio|ide|scsi|sata|mp)([0-9]+):\s([a-zA-Z0-9._-]+):(.*)-([0-9]+)-disk-([0-9]+).*,(.*)$/\1\2: $newpool:\4-$newvmid-disk-\6,\7/g" | $sedcmd | sed -e '/^$/,$d' | sed -e '/ide[0-9]:.*-cloudinit,media=cdrom.*/d' | grep -v "^parent:\s.*$" | ssh "$dst" "cat - >$newconfig"```
+* Make dst image name the same as source image name
+  Line: 607: Replace ```dst_image_name=${BASH_REMATCH[1]}-$src_image_pool_pve``` by ```dst_image_name=${BASH_REMATCH[1]}```
