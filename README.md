@@ -96,7 +96,7 @@ apt install git pv gawk jq curl
 
 ## Install the Script somewhere, eg to /opt
 
-git clone https://github.com/Ephrem/crossover/ /opt 
+git clone https://github.com/EphremTeshale/crossover/ /opt 
 
 ```
 
@@ -374,7 +374,7 @@ Ceph Documentation:
 Proxmox Wiki:
 https://pve.proxmox.com/wiki/
 
-## Changes on this for:
+## Changes on this fork:
 * Support for pool names that have characters
 
   Line 90: Replace ```declare -r recephimg='([a-zA-Z0-9]+)\:(.*)' ``` by ```declare -r recephimg='([a-zA-Z0-9._-]+)\:(.*)'```
